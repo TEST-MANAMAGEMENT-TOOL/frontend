@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* QA Testing Management System Design System */
+@layer base {
+  :root {
+    /* Core Colors */
+    --background: 0 0% 100%;
+    --foreground: 222 22% 17%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 22% 17%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 22% 17%;
+
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 98%;
+    --secondary-foreground: 222 22% 17%;
+
+    --muted: 210 40% 98%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 210 40% 98%;
+    --accent-foreground: 222 22% 17%;
+
+    --success: 142 76% 36%;
+    --warning: 38 92% 50%;
+    --destructive: 0 84% 60%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
+
+    /* Shadows */
+    --shadow-card: 0 1px 2px 0 hsl(0 0% 0% / 0.05);
+    --shadow-hover: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 37% 13%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 37% 13%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 33% 17%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 221 83% 53%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  /* Cards */
+  .metric-card {
+    @apply bg-card border border-border rounded-lg p-6 transition-all duration-200;
+    box-shadow: var(--shadow-card);
+  }
+  .metric-card:hover {
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* Navigation */
+  .nav-item {
+    @apply flex items-center space-x-3 px-3 py-2 mx-2 rounded-md text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors duration-150;
+  }
+  .nav-item-active {
+    @apply bg-primary/10 text-primary font-medium;
+  }
+
+  /* Tables */
+  .data-table {
+    @apply w-full border-collapse bg-card rounded-lg overflow-hidden;
+    box-shadow: var(--shadow-card);
+  }
+  .table-header {
+    @apply bg-muted/30 text-muted-foreground font-medium text-sm;
+  }
+  .table-row {
+    @apply border-b border-border hover:bg-muted/20 transition-colors duration-150;
+  }
+
+  /* Status Badges */
+  .status-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  .status-passed {
+    @apply bg-success/10 text-success border border-success/20;
+  }
+  .status-failed {
+    @apply bg-destructive/10 text-destructive border border-destructive/20;
+  }
+  .status-blocked {
+    @apply bg-warning/10 text-warning border border-warning/20;
+  }
+  .status-not-run {
+    @apply bg-muted text-muted-foreground border border-border;
+  }
+}
+
+@layer utilities {
+  /* Animations */
+  @keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+}

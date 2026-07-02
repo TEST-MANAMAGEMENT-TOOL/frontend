@@ -1,0 +1,126 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Severity {
+  Critical
+  High
+  Medium
+  Low
+}
+
+enum Priority {
+  Critical
+  High
+  Medium
+  Low
+}
+
+enum Status {
+  Open
+  InProgress
+  Resolved
+  Closed
+  Reopened
+}
+
+enum BugType {
+  Functional
+  UI
+  Performance
+  Security
+  Other
+}
+
+enum Resolution {
+  Fixed
+  Duplicate
+  WontFix
+  CannotReproduce
+  NotABug
+  Other
+}
+
+model BugReport {
+  id                String     @id @default(cuid())
+  title             String
+  module            String
+  shortDescription  String
+  severity          Severity
+  priority          Priority
+  status            Status
+  type              BugType
+  reportedBy        String
+  dateReported      DateTime   @default(now())
+  stepsToReproduce  String
+  expectedResults   String
+  actualResults     String
+  assignedTo        String?
+  environment       String
+  browser           String?
+  os                String?
+  buildVersion      String?
+  attachments       String[]   @default([])
+  comments          String?
+  remarks           String?
+  dateResolved      DateTime?
+  resolution        Resolution?
+  relatedIssues     String[]   @default([])
+  timeSpent         String?
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+
+  @@map("bug_reports")
+}
+
+enum TestStatus {
+  NotStarted
+  InProgress
+  Completed
+  Blocked
+  Failed
+}
+
+model RTMEntry {
+  id            String     @id @default(cuid())
+  requirementId String
+  mainFeature   String
+  subFeature    String?
+  description   String
+  testCaseId    String
+  testStatus    TestStatus
+  remarks       String?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  @@map("rtm_entries")
+}
+
+// Add this if you want to track who created/updated the bug report
+// model User {
+//   id            String      @id @default(cuid())
+//   name          String
+//   email         String      @unique
+//   createdAt     DateTime    @default(now())
+//   updatedAt     DateTime    @updatedAt
+//   reportedBugs  BugReport[]
+//   assignedBugs  BugReport[] @relation("AssignedBugs")
+// }
+
+// Update the BugReport model to include relations to User if needed
+// model BugReport {
+//   ...
+//   reportedById   String?    @map("reported_by_id")
+//   reportedBy     User?      @relation("ReportedBugs", fields: [reportedById], references: [id])
+//   assignedToId   String?    @map("assigned_to_id")
+//   assignedTo     User?      @relation("AssignedBugs", fields: [assignedToId], references: [id])
+//   ...
+// }

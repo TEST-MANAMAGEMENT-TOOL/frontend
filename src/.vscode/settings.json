@@ -1,0 +1,16 @@
+{
+    "css.lint.unknownAtRules": "ignore",
+    "tailwindCSS.includeLanguages": {
+      "plaintext": "html",
+      "javascript": "javascript",
+      "javascriptreact": "javascriptreact",
+      "typescript": "typescript",
+      "typescriptreact": "typescriptreact"
+    },
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  }
+  
